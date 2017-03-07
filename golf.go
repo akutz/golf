@@ -167,7 +167,11 @@ func fore(key string, val interface{}, bk9 map[string]interface{}) {
 		ef = map[string]interface{}{}
 
 		// get the value's type
-		vt := reflect.ValueOf(val).Elem()
+		vt := reflect.ValueOf(val)
+
+		if vt.Kind() == reflect.Ptr {
+			vt = vt.Elem()
+		}
 
 		// get the value's type's type
 		tt := vt.Type()
